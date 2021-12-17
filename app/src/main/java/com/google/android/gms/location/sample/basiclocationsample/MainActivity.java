@@ -24,6 +24,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import androidx.annotation.NonNull;
+
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AppCompatActivity;
@@ -76,14 +81,14 @@ public class MainActivity extends AppCompatActivity {
         mLongitudeText = (TextView) findViewById((R.id.longitude_text));
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-    }
 
+    }
     @Override
     public void onStart() {
         super.onStart();
 
-        if (!checkPermissions()) {
-            //requestPermissions();
+        if (checkPermissions()) {
+            requestPermissions();
         } else {
             getLastLocation();
         }
